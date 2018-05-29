@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FF6E40</color>
+
+    <color name="mdark_hintColor">#80FFFFFF</color>
+    <color name="mdark_labelColor">#80FFFFFF</color>
+
+
+    <!--<color name="colorPrimary">@color/actionbar_material_dark</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>-->
+
+    <!-- Material colors -->
+    <color name="m_white">#FFFFFF</color>
+    <color name="m_red">#F44336</color>
+    <color name="m_lightGreen">#8BC34A</color>
+    <color name="m_black">#000000</color>
+    <color name="m_hintColor">#EF9A9A</color>
+</resources>
