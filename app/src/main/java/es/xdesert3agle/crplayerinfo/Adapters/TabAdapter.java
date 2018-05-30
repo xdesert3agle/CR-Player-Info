@@ -1,4 +1,4 @@
-package es.xdesert3agle.crplayerinfo.util;
+package es.xdesert3agle.crplayerinfo.Adapters;
 
 
 import android.support.v4.app.Fragment;
@@ -8,12 +8,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 import java.util.ArrayList;
 
-public class SectionsPageAdapter extends FragmentPagerAdapter {
+public class TabAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
-    public SectionsPageAdapter(FragmentManager fm){
+    public TabAdapter(FragmentManager fm){
         super(fm);
     }
 

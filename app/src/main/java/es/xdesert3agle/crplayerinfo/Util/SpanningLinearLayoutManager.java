@@ -1,4 +1,4 @@
-package es.xdesert3agle.crplayerinfo.util;
+package es.xdesert3agle.crplayerinfo.Util;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;

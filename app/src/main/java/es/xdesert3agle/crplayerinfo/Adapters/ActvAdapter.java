@@ -1,4 +1,4 @@
-package es.xdesert3agle.crplayerinfo.util;
+package es.xdesert3agle.crplayerinfo.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

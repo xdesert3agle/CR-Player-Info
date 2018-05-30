@@ -1,10 +1,9 @@
-package es.xdesert3agle.crplayerinfo;
+package es.xdesert3agle.crplayerinfo.Screens;
 
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,11 +16,9 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import es.xdesert3agle.crplayerinfo.apiclasses.Card;
-import es.xdesert3agle.crplayerinfo.apiclasses.Player;
-import es.xdesert3agle.crplayerinfo.util.CardUpgraderRecyclerAdapter;
-import es.xdesert3agle.crplayerinfo.util.ChestCycleRecyclerAdapter;
-import es.xdesert3agle.crplayerinfo.util.SpanningLinearLayoutManager;
+import es.xdesert3agle.crplayerinfo.API_classes.Player;
+import es.xdesert3agle.crplayerinfo.R;
+import es.xdesert3agle.crplayerinfo.Util.SpanningLinearLayoutManager;
 
 public class PlayerInfo extends Fragment{
     Player mPlayer;

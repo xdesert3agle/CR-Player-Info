@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".Util.Init"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".PlayerTagInput"
+            android:name=".Screens.PlayerTagInput"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -22,8 +23,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TabContainer"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".Screens.TabContainer"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package es.xdesert3agle.crplayerinfo;
+package es.xdesert3agle.crplayerinfo.Screens;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import es.xdesert3agle.crplayerinfo.apiclasses.Player;
-import es.xdesert3agle.crplayerinfo.util.SectionsPageAdapter;
+import es.xdesert3agle.crplayerinfo.API_classes.Player;
+import es.xdesert3agle.crplayerinfo.R;
+import es.xdesert3agle.crplayerinfo.Adapters.TabAdapter;
 
 public class TabContainer extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class TabContainer extends AppCompatActivity {
 
     private ViewPager mViewPager;
 
-    private SectionsPageAdapter mSectionsPageAdapter;
+    private TabAdapter mSectionsPageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class TabContainer extends AppCompatActivity {
     }
 
     private void setUpViewPager(ViewPager viewPager){
-        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        TabAdapter adapter = new TabAdapter(getSupportFragmentManager());
         Player player = getIntent().getExtras().getParcelable("playerObj");
 
         Bundle bundle = new Bundle();

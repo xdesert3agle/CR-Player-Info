@@ -1,4 +1,4 @@
-package es.xdesert3agle.crplayerinfo.util;
+package es.xdesert3agle.crplayerinfo.Adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.xdesert3agle.crplayerinfo.R;
-import es.xdesert3agle.crplayerinfo.apiclasses.Card;
+import es.xdesert3agle.crplayerinfo.API_classes.Card;
 
 public class CardUpgraderRecyclerAdapter extends RecyclerView.Adapter<CardUpgraderRecyclerAdapter.ViewHolder> {
     private List<Card> mCardList;

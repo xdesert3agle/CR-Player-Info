@@ -1,4 +1,4 @@
-package es.xdesert3agle.crplayerinfo;
+package es.xdesert3agle.crplayerinfo.Screens;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,10 +22,11 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.xdesert3agle.crplayerinfo.apiclasses.Card;
-import es.xdesert3agle.crplayerinfo.apiclasses.Player;
-import es.xdesert3agle.crplayerinfo.util.CardUpgraderRecyclerAdapter;
-import es.xdesert3agle.crplayerinfo.util.ActvAdapter;
+import es.xdesert3agle.crplayerinfo.API_classes.Card;
+import es.xdesert3agle.crplayerinfo.API_classes.Player;
+import es.xdesert3agle.crplayerinfo.R;
+import es.xdesert3agle.crplayerinfo.Adapters.CardUpgraderRecyclerAdapter;
+import es.xdesert3agle.crplayerinfo.Adapters.ActvAdapter;
 
 import static java.util.Collections.sort;
 

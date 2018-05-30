@@ -1,11 +1,10 @@
-package es.xdesert3agle.crplayerinfo.util;
+package es.xdesert3agle.crplayerinfo.Adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -13,7 +12,6 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import es.xdesert3agle.crplayerinfo.R;
-import es.xdesert3agle.crplayerinfo.apiclasses.Card;
 
 public class ChestCycleRecyclerAdapter extends RecyclerView.Adapter<ChestCycleRecyclerAdapter.ViewHolder> {
     private List<String> upcomingChests;

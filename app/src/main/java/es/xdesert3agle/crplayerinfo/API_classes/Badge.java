@@ -1,4 +1,4 @@
-package es.xdesert3agle.crplayerinfo.apiclasses;
+package es.xdesert3agle.crplayerinfo.API_classes;
 
 import android.os.Parcel;
 import android.os.Parcelable;

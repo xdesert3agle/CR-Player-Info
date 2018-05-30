@@ -1,4 +1,4 @@
-package es.xdesert3agle.crplayerinfo;
+package es.xdesert3agle.crplayerinfo.Screens;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -26,19 +26,17 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
-import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.context.IconicsLayoutInflater2;
 
 import net.steamcrafted.loadtoast.LoadToast;
-import net.steamcrafted.loadtoast.MaterialProgressDrawable;
 
 import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import es.xdesert3agle.crplayerinfo.apiclasses.Player;
+import es.xdesert3agle.crplayerinfo.API_classes.Player;
+import es.xdesert3agle.crplayerinfo.R;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -55,8 +53,7 @@ public class PlayerTagInput extends AppCompatActivity {
     private String mErrorMsg;
     private Player player;
     private Intent intent;
-
-    boolean wasPaused = false;
+    private boolean wasPaused = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,19 +134,24 @@ public class PlayerTagInput extends AppCompatActivity {
                                         intent = new Intent(PlayerTagInput.this, TabContainer.class).putExtra("playerObj", player);
                                         startActivity(intent);
                                         break;
+
                                     case 401:
                                         mErrorMsg = "Petición no autorizada. Contacta con el administrador de la aplicación.";
                                         break;
+
                                     case 400:
                                     case 404:
                                         mErrorMsg = "No existe ningún jugador con el ID #" + etPlayerTag.getText().toString() + ".";
                                         break;
+
                                     case 500:
                                         mErrorMsg = "El servidor no se encuentra disponible temporalmente debido a un problema.";
                                         break;
+
                                     case 503:
                                         mErrorMsg = "El servidor se encuentra en mantenimiento temporal.";
                                         break;
+
                                     case 522:
                                         mErrorMsg = "El servidor no se encuentra disponible temporalmente.";
                                         break;
