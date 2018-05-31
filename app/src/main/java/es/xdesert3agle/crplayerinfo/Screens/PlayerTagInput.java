@@ -17,9 +17,11 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,27 +33,37 @@ import com.mikepenz.iconics.context.IconicsLayoutInflater2;
 import net.steamcrafted.loadtoast.LoadToast;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.xdesert3agle.crplayerinfo.API_classes.Player;
 import es.xdesert3agle.crplayerinfo.R;
+import es.xdesert3agle.crplayerinfo.Util.SharedPrefManager;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class PlayerTagInput extends AppCompatActivity {
+public class PlayerTagInput extends AppCompatActivity implements View.OnClickListener{
     @BindView(R.id.etPlayerTag) EditText etPlayerTag;
+    @BindView(R.id.spFavourites) Spinner spFavourites;
     @BindView(R.id.btnCheckTag) Button btnCheckTag;
-    @BindView(R.id.btnCheckFav) LinearLayout btnCheckFav;
+    @BindView(R.id.btnAddToFav) LinearLayout btnAddToFav;
+
+    private final String KEY_FAV_LIST = "favList";
 
     //@BindView(R.id.tvErrorMsg) TextView tvErrorMsg;
 
     private String mErrorMsg;
     private Player player;
+    private List<String> mFavList = new ArrayList<>();
+    private String mInputTag;
+    Gson mGson = new Gson();
     private Intent intent;
     private boolean wasPaused = false;
 
@@ -62,20 +74,44 @@ public class PlayerTagInput extends AppCompatActivity {
         setContentView(R.layout.activity_playertag_input);
 
         ButterKnife.bind(this);
-        //ImgUtil.getMaterialIcon(GoogleMaterial.Icon.gmd_star)
 
-        btnCheckFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(PlayerTagInput.this, "Esto es un Relative Layout con un TextView", Toast.LENGTH_SHORT).show();
-            }
-        });
+        btnCheckTag.setOnClickListener(this);
+        btnAddToFav.setOnClickListener(this);
 
         etPlayerTag.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+    }
 
-        btnCheckTag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if(isApplicationInBackground()) {
+            wasPaused = true;
+            Log.d(PlayerTagInput.class.getSimpleName(), "wasPaused = true");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        loadFavoriteList();
+
+        if(!wasPaused) {
+            Log.d(PlayerTagInput.class.getSimpleName(), "onResume y no estaba pausado -> cleanUiElements");
+            cleanUIElements();
+        } else {
+            Log.d(PlayerTagInput.class.getSimpleName(), "onResume y estaba pausado -> wasPaused = false");
+            wasPaused = false;
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        mInputTag = etPlayerTag.getText().toString();
+
+        switch (view.getId()) {
+            case R.id.btnCheckTag:
                 hideKeyboard();
 
                 DisplayMetrics metrics = new DisplayMetrics();
@@ -159,42 +195,30 @@ public class PlayerTagInput extends AppCompatActivity {
                                 updateErrorMsg(mErrorMsg);
                             }
                         });
-                    }
-                    else {
+                    } else {
                         lt.success();
                         intent = new Intent(PlayerTagInput.this, TabContainer.class).putExtra("playerObj", player);
                         startActivity(intent);
                     }
-                }
-                else {
+                } else {
                     lt.error();
                     mErrorMsg = "El ID de jugador #" + etPlayerTag.getText().toString() + " no es válido.";
                     updateErrorMsg(mErrorMsg);
                 }
-            }
-        });
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+                break;
 
-        if(isApplicationInBackground()) {
-            wasPaused = true;
-            Log.d(PlayerTagInput.class.getSimpleName(), "wasPaused = true");
-        }
-    }
+            case R.id.btnAddToFav:
+                if (!isTagStored(mInputTag)) {
+                    mFavList.add(mInputTag);
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+                    String jsonText = mGson.toJson(mFavList);
+                    SharedPrefManager.write(KEY_FAV_LIST, jsonText);
+                } else {
+                    Toast.makeText(PlayerTagInput.this, String.format("El tag %s ya existe en tu lista de favoritos.", mInputTag), Toast.LENGTH_SHORT).show();
+                }
 
-        if(!wasPaused) {
-            Log.d(PlayerTagInput.class.getSimpleName(), "onResume y no estaba pausado -> cleanUiElements");
-            cleanUIElements();
-        } else {
-            Log.d(PlayerTagInput.class.getSimpleName(), "onResume y estaba pausado -> wasPaused = false");
-            wasPaused = false;
+                break;
         }
     }
 
@@ -310,5 +334,20 @@ public class PlayerTagInput extends AppCompatActivity {
         if (null != activity.getCurrentFocus())
             imm.hideSoftInputFromWindow(activity.getCurrentFocus()
                     .getApplicationWindowToken(), 0);
+    }
+
+    public void loadFavoriteList() {
+        String jsonText = SharedPrefManager.read(KEY_FAV_LIST, null);
+        String[] text = mGson.fromJson(jsonText, String[].class);
+
+        if (text != null)
+            mFavList = new ArrayList<>(Arrays.asList(text));
+
+        ArrayAdapter<String> spCategoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, mFavList);
+        spFavourites.setAdapter(spCategoryAdapter);
+    }
+
+    public boolean isTagStored(String tag){
+        return mFavList.toString().matches(String.format(".*\\b%s\\b.*", tag));
     }
 }

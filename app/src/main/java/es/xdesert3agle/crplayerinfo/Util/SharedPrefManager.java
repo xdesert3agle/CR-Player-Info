@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.Map;
+
 public class SharedPrefManager {
     private static SharedPreferences mSharedPref;
 
@@ -41,5 +43,9 @@ public class SharedPrefManager {
     public static void write(String key, Integer value) {
         SharedPreferences.Editor prefsEditor = mSharedPref.edit();
         prefsEditor.putInt(key, value).commit();
+    }
+
+    public static Map<String, ?> getAll(){
+        return mSharedPref.getAll();
     }
 }

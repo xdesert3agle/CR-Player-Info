@@ -53,8 +53,8 @@
                     android:id="@+id/etPlayerTag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="8"
-                    android:hint="#" />
+                    android:hint="#"
+                    android:ems="8" />
             </LinearLayout>
 
             <LinearLayout
@@ -64,7 +64,7 @@
                 android:padding="2dp">
 
                 <LinearLayout
-                    android:id="@+id/btnCheckFav"
+                    android:id="@+id/btnAddToFav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/Widget.AppCompat.Button.Colored"
@@ -88,7 +88,7 @@
                     android:layout_weight="1"
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:textSize="16dp"
-                    android:text="Buscar"
+                    android:text="BUSCAR"
                     android:textColor="@color/m_white" />
             </LinearLayout>
         </LinearLayout>
@@ -121,7 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Widget.AppCompat.Button.Colored"
-                android:text="Buscar"
+                android:text="BUSCAR"
                 android:textColor="@color/m_white"/>
         </LinearLayout>
     </LinearLayout>
